@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <p>Displaying location using Latitude and Longitude</p>
+
+    <button type="button" class="geeks" onclick="getLocation()">
+        Click Me
+    </button>
+
+    <p>Latitude:</p>
+    <textarea id="latitude" rows="1" cols="20" readonly></textarea>
+    <p>Longitude:</p>
+    <textarea id="longitude" rows="1" cols="20" readonly></textarea>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showLoc, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showLoc(pos) {
+            document.getElementById("latitude").value = pos.coords.latitude;
+            document.getElementById("longitude").value = pos.coords.longitude;
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
